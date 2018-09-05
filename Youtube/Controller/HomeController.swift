@@ -34,10 +34,28 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     func fetchVideos(){
         
-        let todoEndpoint: String = ""
+        let todoEndpoint: String = "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json"
         guard let url = URL(string: todoEndpoint) else {
             print("Error: cannot create URL")
             return
+        }
+        
+        let urlRequest = URLRequest(url: url)
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        
+        let task = session.dataTask(with: urlRequest) { (data, response, error) in
+            
+            //Verificar que no exista error
+            guard error == nil else{
+                print("error")
+                return
+            }
+            
+            //Guardando la respuesta
+            
+            
+            
         }
         
     }
