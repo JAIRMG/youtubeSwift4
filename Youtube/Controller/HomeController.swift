@@ -10,7 +10,7 @@ import UIKit
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    var videos: [Video] = {
+    /*var videos: [Video] = {
         
         var channel = Channel()
         channel.name = "JairChannel"
@@ -30,7 +30,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
          return [blankSpaceVideo, badBloodVideo]
         
-    }()
+    }() */
+    
+    
+    var videos: [Video]?
     
     func fetchVideos(){
         
@@ -40,9 +43,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             return
         }
         
-        let urlRequest = URLRequest(url: url)
+        var urlRequest = URLRequest(url: url)
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
+        urlRequest.httpMethod = "GET"
         
         let task = session.dataTask(with: urlRequest) { (data, response, error) in
             
@@ -53,10 +57,64 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             }
             
             //Guardando la respuesta
+            // make sure we got data
+            guard let _ = data else {
+                print("Error: did not receive data")
+                return
+            }
             
+            
+            let realResponse = response as! HTTPURLResponse
+            
+            switch realResponse.statusCode {
+                
+            case 200:
+                
+                do{
+                    
+              
+                    let json = try JSONSerialization.jsonObject(with: data!, options: [])
+                    
+                    self.videos = [Video]()
+                    
+                    for dictionario in json as! [[String: AnyObject]]{
+                        
+                        //Video
+                        let video = Video()
+                        video.title = dictionario["title"] as? String
+                        video.thumbnailImageName = dictionario["thumbnail_image_name"] as? String
+                        self.videos?.append(video)
+                        
+                        let channelDictionary = dictionario["channel"] as! [String: AnyObject]
+                        
+                        //Channel
+                        let channel = Channel()
+                        channel.name = channelDictionary["name"] as? String
+                        channel.profileImageName = channelDictionary["profile_image_name"] as? String
+                        
+                        video.channel = channel
+                        
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.collectionView?.reloadData()
+                    }
+                    
+                    
+                } catch  {
+                    print("error al parsear el json")
+                    return
+                }
+                
+                
+                
+            default:
+                print("Estatus http no manejado \(realResponse.statusCode)")
+            }
             
             
         }
+        task.resume()
         
     }
     
@@ -80,25 +138,34 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
         
+        
+        
         setUpMenuBar()
         setUpBarButtons()
         
     }
     
+    
+    
     func setUpBarButtons(){
-        let searchImage = UIImage(named: "search")?.withRenderingMode(.alwaysOriginal)
-        let searchBarButtonItem = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(handleSearch))
-        let dotsImage = UIImage(named: "dots")?.withRenderingMode(.alwaysOriginal)
-        let moreButton = UIBarButtonItem(image: dotsImage, style: .plain, target: self, action: #selector(handleMore))
+        let searchImage = UIImage(named: "dots")?.withRenderingMode(.alwaysOriginal)
+        let searchBarButtonItem = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(handleMore))
+        let dotsImage = UIImage(named: "search")?.withRenderingMode(.alwaysOriginal)
+        let moreButton = UIBarButtonItem(image: dotsImage, style: .plain, target: self, action: #selector(handleSearch))
         navigationItem.rightBarButtonItems = [searchBarButtonItem, moreButton]
         
     }
     
-    @objc func handleMore(){
+    @objc func handleSearch(){
+        
     }
     
-    @objc func handleSearch(){
+    
+    let settingsLauncher = SettingsLauncher()
+    @objc func handleMore(){
+        settingsLauncher.showSettings()
     }
+    
     
     let menuBar: MenuBar = {
         let mb = MenuBar()
@@ -113,13 +180,14 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return videos.count
+       
+        return videos?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! VideoCell
         
-        cell.video = videos[indexPath.item]
+        cell.video = videos?[indexPath.item]
         
         return cell
     }

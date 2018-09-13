@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0527AC32214AD3C8001EF880 /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0527AC31214AD3C8001EF880 /* SettingsLauncher.swift */; };
 		057C61A72118B1C100558618 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057C61A62118B1C100558618 /* AppDelegate.swift */; };
 		057C61A92118B1C100558618 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057C61A82118B1C100558618 /* HomeController.swift */; };
 		057C61AC2118B1C100558618 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 057C61AA2118B1C100558618 /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0527AC31214AD3C8001EF880 /* SettingsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 		057C61A32118B1C100558618 /* Youtube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Youtube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		057C61A62118B1C100558618 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		057C61A82118B1C100558618 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				057C61A82118B1C100558618 /* HomeController.swift */,
+				0527AC31214AD3C8001EF880 /* SettingsLauncher.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				057C61A92118B1C100558618 /* HomeController.swift in Sources */,
 				05FF04CA21307289000C8B49 /* MenuBar.swift in Sources */,
 				057C61AF2118B1C100558618 /* Youtube.xcdatamodeld in Sources */,
+				0527AC32214AD3C8001EF880 /* SettingsLauncher.swift in Sources */,
 				057C61A72118B1C100558618 /* AppDelegate.swift in Sources */,
 				05FF04CD2135A9A3000C8B49 /* Video.swift in Sources */,
 				05FF04C421306CCC000C8B49 /* Extensions.swift in Sources */,
@@ -483,7 +487,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Youtube/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -500,7 +506,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Youtube/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

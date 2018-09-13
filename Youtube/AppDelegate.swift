@@ -35,9 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let statusBarBackGroundView = UIView()
         statusBarBackGroundView.backgroundColor = UIColor.rgb(red: 194, green: 31, blue: 31)
-        window?.addSubview(statusBarBackGroundView)
-        window?.addConstraintsWithFormat(format: "H:|[v0]|", views: statusBarBackGroundView)
-        window?.addConstraintsWithFormat(format: "V:|[v0(35)]|", views: statusBarBackGroundView)
+        //window?.addSubview(statusBarBackGroundView)
+        //window?.addConstraintsWithFormat(format: "H:|[v0]|", views: statusBarBackGroundView)
+        //window?.addConstraintsWithFormat(format: "V:|[v0(35)]|", views: statusBarBackGroundView)
         
         return true
     }

@@ -30,11 +30,13 @@ class VideoCell: BaseCell {
             titleLabel.text = video?.title
             
             
-            thumbnailImageView.image = UIImage(named: (video?.thumbnailImageName)!)
+            setUpThumbNailImage()
             
-            if let profileImageName = video?.channel?.profileImageName {
+            setUpProfileImage()
+            
+            /*if let profileImageName = video?.channel?.profileImageName {
                 userProfileImageView.image = UIImage(named: profileImageName)
-            }
+            }*/
             
             if let channelName = video?.channel?.name, let numberOfViews = video?.numberOfViews {
                 let numberFormatter = NumberFormatter()
@@ -67,11 +69,26 @@ class VideoCell: BaseCell {
         }
     }
     
+    func setUpProfileImage(){
+        
+        if let profileImageURL = video?.channel?.profileImageName{
+         self.userProfileImageView.loadImageUsinUrlString(urlString: profileImageURL)
+        }
+        
+    }
     
+    func setUpThumbNailImage(){
+        
+        if let thumnailImageURL = video?.thumbnailImageName{
+            self.thumbnailImageView.loadImageUsinUrlString(urlString: thumnailImageURL)
+        }
+        
+        //thumbnailImageView.image = UIImage(named: (video?.thumbnailImageName)!)
+        
+    }
     
-    let thumbnailImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.backgroundColor = UIColor.blue
+    let thumbnailImageView: CustomImageView = {
+        let imageView = CustomImageView()
         imageView.image = UIImage(named: "norway")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -84,12 +101,13 @@ class VideoCell: BaseCell {
         return view
     }()
     
-    let userProfileImageView: UIImageView = {
-        let imageView = UIImageView()
+    let userProfileImageView: CustomImageView = {
+        let imageView = CustomImageView()
         imageView.backgroundColor = UIColor.green
         imageView.image = UIImage(named: "tessa")
         imageView.layer.cornerRadius = 22
         imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
