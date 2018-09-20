@@ -20,6 +20,9 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         return cv
     }()
     
+    //Referencia a la otra clase para poder llamar un método scrollToIndex
+    var homeController: HomeController?
+    
     let cellId = "cellId"
     let imageNames = ["home", "trending", "subscriptions", "account"]
     
@@ -58,12 +61,16 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let x = CGFloat(indexPath.item) * frame.width / 4
+        
+        
+        /*let x = CGFloat(indexPath.item) * frame.width / 4
         horizontalBarLeftAnchor?.constant = x
         
         UIView.animate(withDuration: 0.5) {
             self.layoutIfNeeded()
-        }
+        }*/
+        
+        homeController?.scrollToMenuIndex(menuIndex: indexPath.row)
         
     }
     
@@ -75,6 +82,8 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MenuCell
         cell.imageView.image = UIImage(named: imageNames[indexPath.row])?.withRenderingMode(.alwaysTemplate)
         cell.tintColor = UIColor.rgb(red: 91, green: 14, blue: 13)
+        
+        
         
         return cell
     }
