@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		051662BF2152BE76003E7942 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051662BE2152BE76003E7942 /* ApiService.swift */; };
+		05218685215945E6007BB67C /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05218684215945E6007BB67C /* FeedCell.swift */; };
 		0527AC32214AD3C8001EF880 /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0527AC31214AD3C8001EF880 /* SettingsLauncher.swift */; };
 		0527AC3421501425001EF880 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0527AC3321501425001EF880 /* SettingCell.swift */; };
 		057C61A72118B1C100558618 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057C61A62118B1C100558618 /* AppDelegate.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		051662BE2152BE76003E7942 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		05218684215945E6007BB67C /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		0527AC31214AD3C8001EF880 /* SettingsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 		0527AC3321501425001EF880 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		057C61A32118B1C100558618 /* Youtube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Youtube.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,6 +170,7 @@
 				05FF04C621306DB5000C8B49 /* VideoCell.swift */,
 				05FF04C921307289000C8B49 /* MenuBar.swift */,
 				0527AC3321501425001EF880 /* SettingCell.swift */,
+				05218684215945E6007BB67C /* FeedCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				057C61A92118B1C100558618 /* HomeController.swift in Sources */,
 				05FF04CA21307289000C8B49 /* MenuBar.swift in Sources */,
 				057C61AF2118B1C100558618 /* Youtube.xcdatamodeld in Sources */,
+				05218685215945E6007BB67C /* FeedCell.swift in Sources */,
 				0527AC32214AD3C8001EF880 /* SettingsLauncher.swift in Sources */,
 				057C61A72118B1C100558618 /* AppDelegate.swift in Sources */,
 				051662BF2152BE76003E7942 /* ApiService.swift in Sources */,
