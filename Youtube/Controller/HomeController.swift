@@ -36,6 +36,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     var videos: [Video]?
     
     let cellId = "cellId"
+    let trendingCellId = "trendingCellId"
+    let SubscriptionCellId = "SubscriptionCellId"
+    let titles = ["Home","Trending", "Subscriptions","Account"]
     
     
     
@@ -75,7 +78,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         //collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
         //collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(TrendingCell.self, forCellWithReuseIdentifier: trendingCellId)
+        collectionView?.register(SubscriptionCell.self, forCellWithReuseIdentifier: SubscriptionCellId)
+        
         collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
         
@@ -102,6 +109,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     func scrollToMenuIndex(menuIndex: Int){
         let indexPath = NSIndexPath(item: menuIndex, section: 0)
         collectionView?.scrollToItem(at: indexPath as IndexPath, at: [], animated: true)
+        setTitle(indice: menuIndex)
     }
     
     let settingsLauncher = SettingsLauncher()
@@ -109,6 +117,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         settingsLauncher.showSettings()
     }
     
+    private func setTitle(indice: Int){
+        if let titleLabel = navigationItem.titleView as? UILabel{
+            titleLabel.text = titles[indice]
+        }
+    }
     
     lazy var menuBar: MenuBar = {
         let mb = MenuBar()
@@ -131,7 +144,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         menuBar.horizontalBarLeftAnchor?.constant = scrollView.contentOffset.x / 4
     }
     
-    let titles = ["Home","Trending", "Subscriptions","Account"]
+    
     
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
@@ -143,9 +156,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         menuBar.collectionView.selectItem(at: indexPath as IndexPath, animated: true, scrollPosition: [])
         
         //titulo
-        if let titleLabel = navigationItem.titleView as? UILabel{
-            titleLabel.text = titles[Int(index)]
-        }
+        setTitle(indice: indexPath.row)
         
         
     }
@@ -156,15 +167,28 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        
+        let identifier: String
+        
+        if indexPath.row == 1{
+            identifier = trendingCellId
+        } else if indexPath.row == 2 {
+            identifier = SubscriptionCellId
+        } else {
+            identifier = cellId
+        }
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
         
         //let colors: [UIColor] = [.blue, .black, .brown, .darkGray]
         //cell.backgroundColor = colors[indexPath.row]
+        //titulo
+        
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height - 50)
+        return CGSize(width: view.frame.width, height: view.frame.height - 65)
     }
     
     

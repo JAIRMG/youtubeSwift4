@@ -70,6 +70,7 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
             self.layoutIfNeeded()
         }*/
         
+        
         homeController?.scrollToMenuIndex(menuIndex: indexPath.row)
         
     }
